@@ -1,5 +1,6 @@
 import turtle
 from Paddle import Paddle
+from Ball import Ball
         
 screen = turtle.Screen()
 screen.title("PingPong")
@@ -12,6 +13,9 @@ paddle_a = Paddle(-350,0)
 
 # Create paddle B
 paddle_b = Paddle(350,0)
+
+# Create Ball
+ball = Ball(0,0)
 
 # Main game loop
 while True:
