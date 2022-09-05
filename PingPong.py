@@ -3,6 +3,7 @@ import turtle
 from Paddle import Paddle
 from Ball import Ball
 from Pen import Pen
+import winsound
         
 screen = turtle.Screen()
 screen.title("PingPong")
@@ -64,13 +65,13 @@ while True:
         pen.score_b += 1
         pen.pen.clear()
         pen.scoreBoard()
-
+        winsound.PlaySound("PingPong\giddylaugh.wav", winsound.SND_ASYNC)
         
     elif ball_1.ball.xcor() >= 390:
         pen.score_a += 1
         pen.pen.clear()
         pen.scoreBoard()
+        winsound.PlaySound("PingPong\giddylaugh.wav", winsound.SND_ASYNC)
 
-    
     # Paddle and ball collision 
     collision(340)
