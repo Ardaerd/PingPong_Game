@@ -1,6 +1,7 @@
 import turtle
 from Paddle import Paddle
 from Ball import Ball
+from Pen import Pen
         
 screen = turtle.Screen()
 screen.title("PingPong")
@@ -19,6 +20,9 @@ paddle_b = Paddle(350,0)
 # Create Ball
 ball_1 = Ball(0,0)
 
+# Create the scoreBoard
+pen = Pen()
+
 # For Paddle which is going up
 screen.onkeypress(paddle_a.paddle_up,"w")
 screen.onkeypress(paddle_b.paddle_up,"Up")
@@ -28,7 +32,16 @@ screen.onkeypress(paddle_b.paddle_up,"Up")
 screen.onkeypress(paddle_a.paddle_down,"s")
 screen.onkeypress(paddle_b.paddle_down,"Down")
 
-        
+def collision(limit):
+      # For paddle_b
+    if (ball_1.ball.xcor() > limit and ball_1.ball.xcor() < limit + 10) and (ball_1.ball.ycor() < paddle_b.paddle.ycor() + 45 and ball_1.ball.ycor() > paddle_b.paddle.ycor() - 45):
+        ball_1.ball.setx(limit)
+        ball_1.ball.dx *= -1
+
+    # For paddle_a
+    if (ball_1.ball.xcor() < -limit and ball_1.ball.xcor() > -limit -10) and (ball_1.ball.ycor() < paddle_a.paddle.ycor() + 45 and ball_1.ball.ycor() > paddle_a.paddle.ycor() - 45):
+        ball_1.ball.setx(-limit)
+        ball_1.ball.dx *= -1
 
 # Main game loop
 while True:
@@ -44,12 +57,4 @@ while True:
     ball_1.checkBorder_X(390)
     
     # Paddle and ball collision 
-    # For paddle_b
-    if (ball_1.ball.xcor() > 340 and ball_1.ball.xcor() < 350) and (ball_1.ball.ycor() < paddle_b.paddle.ycor() + 40 and ball_1.ball.ycor() > paddle_b.paddle.ycor() - 40):
-        ball_1.ball.setx(340)
-        ball_1.ball.dx *= -1
-
-    # For paddle_a
-    if (ball_1.ball.xcor() < -340 and ball_1.ball.xcor() > -350) and (ball_1.ball.ycor() < paddle_a.paddle.ycor() + 40 and ball_1.ball.ycor() > paddle_a.paddle.ycor() - 40):
-        ball_1.ball.setx(-340)
-        ball_1.ball.dx *= -1
+    collision(340)
