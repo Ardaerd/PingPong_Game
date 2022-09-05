@@ -4,6 +4,7 @@ from Paddle import Paddle
 from Ball import Ball
 from Pen import Pen
 import winsound
+from timeit import default_timer as timer
         
 screen = turtle.Screen()
 screen.title("PingPong")
@@ -14,6 +15,9 @@ turtle.delay(0)
 # Create listener for the key pressings
 screen.listen()
 
+# list of the balls
+balls = []
+
 # Create paddle A
 paddle_a = Paddle(-350,0)
 
@@ -22,6 +26,7 @@ paddle_b = Paddle(350,0)
 
 # Create Ball
 ball_1 = Ball(0,0)
+balls.append(ball_1)
 
 # Create the scoreBoard
 pen = Pen()
@@ -36,42 +41,66 @@ screen.onkeypress(paddle_a.paddle_down,"s")
 screen.onkeypress(paddle_b.paddle_down,"Down")
 
 def collision(limit):
+    
+    for ball in balls:
       # For paddle_b
-    if (ball_1.ball.xcor() > limit and ball_1.ball.xcor() < limit + 10) and (ball_1.ball.ycor() < paddle_b.paddle.ycor() + 45 and ball_1.ball.ycor() > paddle_b.paddle.ycor() - 45):
-        ball_1.ball.setx(limit)
-        ball_1.ball.dx *= -1
+        if (ball.ball.xcor() > limit and ball.ball.xcor() < limit + 10) and (ball.ball.ycor() < paddle_b.paddle.ycor() + 45 and ball.ball.ycor() > paddle_b.paddle.ycor() - 45):
+            ball.ball.setx(limit)
+            ball.ball.dx *= -1
 
-    # For paddle_a
-    if (ball_1.ball.xcor() < -limit and ball_1.ball.xcor() > -limit -10) and (ball_1.ball.ycor() < paddle_a.paddle.ycor() + 45 and ball_1.ball.ycor() > paddle_a.paddle.ycor() - 45):
-        ball_1.ball.setx(-limit)
-        ball_1.ball.dx *= -1
+        # For paddle_a
+        if (ball.ball.xcor() < -limit and ball.ball.xcor() > -limit -10) and (ball.ball.ycor() < paddle_a.paddle.ycor() + 45 and ball.ball.ycor() > paddle_a.paddle.ycor() - 45):
+            ball.ball.setx(-limit)
+            ball.ball.dx *= -1
+
+start = timer()
 
 # Main game loop
 while True:
     time.sleep(1 / 60)
     screen.update()
     
-    # Move the ball
-    ball_1.setCoordinates()
+    for ball in balls:
+        # Move the ball
+        ball.setCoordinates()
     
-    # Border Checking
-    ball_1.checkBorder_Y(290)
-    ball_1.checkBorder_Y(-290)
-    ball_1.checkBorder_X(390)
+        # Border Checking
+        ball.checkBorder_Y(290)
+        ball.checkBorder_Y(-290)
+        ball.checkBorder_X(390)
 
     
-    # Updating the score board
-    if ball_1.ball.xcor() <= -390:
-        pen.score_b += 1
-        pen.pen.clear()
-        pen.scoreBoard()
-        winsound.PlaySound("PingPong\giddylaugh.wav", winsound.SND_ASYNC)
+        # Updating the score board
+        if ball.ball.xcor() <= -390:
+            pen.score_b += 1
+            pen.pen.clear()
+            pen.scoreBoard()
+            winsound.PlaySound("PingPong\giddylaugh.wav", winsound.SND_ASYNC)
+            if len(balls) > 1:
+                if type(ball) is Ball:
+                    ball.clearBall()
+                balls.remove(ball)
+            start = timer()
         
-    elif ball_1.ball.xcor() >= 390:
-        pen.score_a += 1
-        pen.pen.clear()
-        pen.scoreBoard()
-        winsound.PlaySound("PingPong\giddylaugh.wav", winsound.SND_ASYNC)
+        elif ball.ball.xcor() >= 390:
+            pen.score_a += 1
+            pen.pen.clear()
+            pen.scoreBoard()
+            winsound.PlaySound("PingPong\giddylaugh.wav", winsound.SND_ASYNC)
+            start = timer()
+            if len(balls) > 1:
+                if type(ball) is Ball:
+                    ball.clearBall()
+                balls.remove(ball)
+            start = timer()
+
 
     # Paddle and ball collision 
     collision(340)
+    
+    end = timer()
+    
+    if (end - start) > 5:
+        start = timer()
+        new_ball = Ball(0,0)
+        balls.append(new_ball)

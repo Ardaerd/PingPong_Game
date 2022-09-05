@@ -11,7 +11,7 @@ class Ball:
         self.ball = turtle.Turtle()
         self.ball.speed(0)
         self.ball.shape("square")
-        self.ball.color("white")
+        self.ball.color("yellow")
         self.ball.penup()
         self.ball.goto(self.x, self.y)   
         self.ball.dx = 6 
@@ -44,4 +44,5 @@ class Ball:
             self.ball.goto(0,0)
             self.ball.dx *= -1
         
-          
+    def clearBall(self):
+        self.ball.clear()
