@@ -28,6 +28,11 @@ screen.onkeypress(paddle_b.paddle_up,"Up")
 screen.onkeypress(paddle_a.paddle_down,"s")
 screen.onkeypress(paddle_b.paddle_down,"Down")
 
+# Checking Y coordinate
+def checkBorder_Y(limit):
+    if ball.ball.ycor() > limit:
+        ball.ball.sety(limit)   
+        ball.ball.dy *= -1 
 
 # Main game loop
 while True:
@@ -36,4 +41,10 @@ while True:
     # Move the ball
     ball.ball.setx(ball.ball.xcor() + ball.ball.dx)
     ball.ball.sety(ball.ball.ycor() + ball.ball.dy)
+    
+    # Border Checking
+    checkBorder_Y(290)
+    checkBorder_Y(-290)
+    
+
 
