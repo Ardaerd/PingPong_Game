@@ -32,4 +32,8 @@ screen.onkeypress(paddle_b.paddle_down,"Down")
 # Main game loop
 while True:
     screen.update()
+    
+    # Move the ball
+    ball.ball.setx(ball.ball.xcor() + ball.ball.dx)
+    ball.ball.sety(ball.ball.ycor() + ball.ball.dy)
 

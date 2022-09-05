@@ -8,9 +8,11 @@ class Ball:
         self.ball()
     
     def ball(self):
-        ball = turtle.Turtle()
-        ball.speed(0)
-        ball.shape("square")
-        ball.color("white")
-        ball.penup()
-        ball.goto(self.x, self.y)    
+        self.ball = turtle.Turtle()
+        self.ball.speed(0)
+        self.ball.shape("square")
+        self.ball.color("white")
+        self.ball.penup()
+        self.ball.goto(self.x, self.y)   
+        self.ball.dx = 0.15 
+        self.ball.dy = 0.15 

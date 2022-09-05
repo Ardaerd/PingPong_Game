@@ -5,7 +5,6 @@ class Paddle:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.paddle
         self.paddle()
 
     # initializing the paddle
