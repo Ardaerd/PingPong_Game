@@ -1,3 +1,4 @@
+import time
 import turtle
 from Paddle import Paddle
 from Ball import Ball
@@ -8,6 +9,7 @@ screen.title("PingPong")
 screen.bgcolor("black")
 screen.setup(width=800, height=600)
 screen.tracer(0)
+turtle.delay(0)
 # Create listener for the key pressings
 screen.listen()
 
@@ -45,6 +47,7 @@ def collision(limit):
 
 # Main game loop
 while True:
+    time.sleep(1 / 60)
     screen.update()
     
     # Move the ball
@@ -53,8 +56,21 @@ while True:
     # Border Checking
     ball_1.checkBorder_Y(290)
     ball_1.checkBorder_Y(-290)
-
     ball_1.checkBorder_X(390)
+
+    
+    # Updating the score board
+    if ball_1.ball.xcor() <= -390:
+        pen.score_b += 1
+        pen.pen.clear()
+        pen.scoreBoard()
+
+        
+    elif ball_1.ball.xcor() >= 390:
+        pen.score_a += 1
+        pen.pen.clear()
+        pen.scoreBoard()
+
     
     # Paddle and ball collision 
     collision(340)

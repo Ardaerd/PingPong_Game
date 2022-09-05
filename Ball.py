@@ -14,8 +14,8 @@ class Ball:
         self.ball.color("white")
         self.ball.penup()
         self.ball.goto(self.x, self.y)   
-        self.ball.dx = 0.3 
-        self.ball.dy = 0.3 
+        self.ball.dx = 6 
+        self.ball.dy = 6 
         
     # Set the coordinates of the ball
     def setCoordinates(self):
@@ -36,7 +36,12 @@ class Ball:
             
     # Checking X coordinate
     def checkBorder_X(self,limit):
-        if self.ball.xcor() > limit or self.ball.xcor() < -limit:
+        if self.ball.xcor() < -limit:
             self.ball.goto(0,0)
             self.ball.dx *= -1
-         
+        
+        elif self.ball.xcor() > limit:
+            self.ball.goto(0,0)
+            self.ball.dx *= -1
+        
+          

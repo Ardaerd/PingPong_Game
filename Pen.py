@@ -4,10 +4,11 @@ import turtle
 class Pen:
 
     def __init__(self):
-        self.scoreBoard()
+        self.score_a = 0
+        self.score_b = 0
         self.separator()
-
-
+        self.scoreBoard()
+        
 
     def separator(self):
         self.pen = turtle.Turtle()
@@ -31,9 +32,9 @@ class Pen:
         self.pen.penup()
         self.pen.hideturtle()
         self.pen.goto(-200, 220)
-        self.pen.write("0", align="center", font=("courier",50,"bold"))
+        self.pen.write(f"{self.score_a}", align="center", font=("courier",50,"bold"))
         
         # For paddle_b
         self.pen.color("red")
         self.pen.goto(200, 220)
-        self.pen.write("0", align="center", font=("courier",50,"bold"))
+        self.pen.write(f"{self.score_b}", align="center", font=("courier",50,"bold"))
