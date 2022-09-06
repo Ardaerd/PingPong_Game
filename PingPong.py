@@ -12,8 +12,6 @@ screen.bgcolor("black")
 screen.setup(width=800, height=600)
 screen.tracer(0)
 turtle.delay(0)
-# Create listener for the key pressings
-screen.listen()
 
 # list of the balls
 balls = []
@@ -40,17 +38,19 @@ screen.onkeypress(paddle_b.paddle_up, "Up")
 screen.onkeypress(paddle_a.paddle_down, "s")
 screen.onkeypress(paddle_b.paddle_down, "Down")
 
+# Create listener for the key pressings
+screen.listen()
 
 def collision(limit):
 
     for ball in balls:
       # For paddle_b
-        if (ball.ball.xcor() > limit and ball.ball.xcor() < limit + 10) and (ball.ball.ycor() < paddle_b.paddle.ycor() + 45 and ball.ball.ycor() > paddle_b.paddle.ycor() - 45):
+        if (ball.ball.xcor() > limit and ball.ball.xcor() < limit + 10) and (ball.ball.ycor() < paddle_b.paddle.ycor() + 50 and ball.ball.ycor() > paddle_b.paddle.ycor() - 50):
             ball.ball.setx(limit)
             ball.ball.dx *= -1
 
         # For paddle_a
-        if (ball.ball.xcor() < -limit and ball.ball.xcor() > -limit - 10) and (ball.ball.ycor() < paddle_a.paddle.ycor() + 45 and ball.ball.ycor() > paddle_a.paddle.ycor() - 45):
+        if (ball.ball.xcor() < -limit and ball.ball.xcor() > -limit - 10) and (ball.ball.ycor() < paddle_a.paddle.ycor() + 50 and ball.ball.ycor() > paddle_a.paddle.ycor() - 50):
             ball.ball.setx(-limit)
             ball.ball.dx *= -1
 
@@ -79,7 +79,7 @@ while True:
             pen.score_b += 1
             pen.pen.clear()
             pen.scoreBoard()
-            winsound.PlaySound("PingPong\giddylaugh.wav", winsound.SND_ASYNC)
+            winsound.PlaySound("giddylaugh.wav", winsound.SND_ASYNC)
             if len(balls) > 1:
                 if type(ball) is Ball:
                     print("deleted")
@@ -91,7 +91,7 @@ while True:
             pen.score_a += 1
             pen.pen.clear()
             pen.scoreBoard()
-            winsound.PlaySound("PingPong\giddylaugh.wav", winsound.SND_ASYNC)
+            winsound.PlaySound("giddylaugh.wav", winsound.SND_ASYNC)
             start = timer()
             if len(balls) > 1:
                 if type(ball) is Ball:
@@ -102,7 +102,7 @@ while True:
 
     end = timer()
 
-    if (end - start) > 10:
+    if (end - start) > 5:
         start = timer()
         new_ball = Ball(0, 0)
         balls.append(new_ball)
