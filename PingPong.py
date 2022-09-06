@@ -61,6 +61,9 @@ start = timer()
 while True:
     time.sleep(1 / 60)
     screen.update()
+    
+    # Paddle and ball collision
+    collision(340)
 
     for ball in balls:
         # Move the ball
@@ -70,9 +73,9 @@ while True:
         ball.checkBorder_Y(290)
         ball.checkBorder_Y(-290)
         ball.checkBorder_X(390)
-
+        
         # Updating the score board
-        if ball.ball.xcor() <= -390:
+        if ball.ball.xcor() <= -385:
             pen.score_b += 1
             pen.pen.clear()
             pen.scoreBoard()
@@ -83,7 +86,7 @@ while True:
                 balls.remove(ball)
             start = timer()
 
-        elif ball.ball.xcor() >= 390:
+        elif ball.ball.xcor() >= 385:
             pen.score_a += 1
             pen.pen.clear()
             pen.scoreBoard()
@@ -95,12 +98,9 @@ while True:
                 balls.remove(ball)
             start = timer()
 
-    # Paddle and ball collision
-    collision(340)
-
     end = timer()
 
-    if (end - start) > 5:
+    if (end - start) > 10:
         start = timer()
         new_ball = Ball(0, 0)
         balls.append(new_ball)
