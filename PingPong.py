@@ -82,7 +82,8 @@ while True:
             winsound.PlaySound("PingPong\giddylaugh.wav", winsound.SND_ASYNC)
             if len(balls) > 1:
                 if type(ball) is Ball:
-                    ball.clearBall()
+                    print("deleted")
+                    ball.ball.reset()
                 balls.remove(ball)
             start = timer()
 
@@ -94,7 +95,8 @@ while True:
             start = timer()
             if len(balls) > 1:
                 if type(ball) is Ball:
-                    ball.clearBall()
+                    print("deleted")
+                    ball.ball.reset()
                 balls.remove(ball)
             start = timer()
 
